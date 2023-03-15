@@ -6,8 +6,8 @@ const PhotoGridItem = ({ id, src, alt, tags }) => {
     <article>
       <Anchor href={`/photos/${id}`}>
         <picture>
-          <source type="image/avif" srcSet={`${src.replace('.jpg', '.avif')}, ${src.replace('.jpg', '@2x.avif')}, ${src.replace('.jpg', '@3x.avif')}`}></source>
-          <source type="image/jpg" srcSet={`${src}, ${src.replace('.jpg', '@2x.jpg')}, ${src.replace('.jpg', '@3x.jpg')}`}></source>
+          <source type="image/avif" srcSet={`${src.replace('.jpg', '.avif')} 1x, ${src.replace('.jpg', '@2x.avif')} 2x, ${src.replace('.jpg', '@3x.avif')} 3x`}></source>
+          <source type="image/jpeg" srcSet={`${src} 1x, ${src.replace('.jpg', '@2x.jpg')} 2x, ${src.replace('.jpg', '@3x.jpg')} 3x`}></source>
           <Image src={src} alt={alt}/>
         </picture>
       </Anchor>
@@ -37,7 +37,9 @@ const Image = styled.img`
 
 const Tags = styled.ul`
   white-space: nowrap;
-  overflow-x: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 4px 0;
 `;
 
 const Tag = styled.li`
@@ -46,10 +48,7 @@ const Tag = styled.li`
   font-size: 0.875rem;
   font-weight: 475;
   color: var(--color-gray-800);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-flex;
+  display: inline;
   &:not(:last-child) {
     margin-right: 8px;
   }
